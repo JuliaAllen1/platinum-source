@@ -14,20 +14,21 @@ namespace pgui
         {
             window.create(sf::VideoMode(viewport_size_x, viewport_size_y), title);
             window.display();
-            pollForClose();
+            while(window.isOpen()){
+                pollForClose();
+            }
+            
         }
         sf::RenderWindow window;
         void pollForClose(){
-            while (window.isOpen())
-            {
-                // check all the window's events that were triggered since the last iteration of the loop
                 sf::Event event;
-                while (window.pollEvent(event))
-                {
-                    // "close requested" event: we close the window
+                while (window.pollEvent(event)){ 
+                    // close when event is a request to close
                     if (event.type == sf::Event::Closed)
-                        window.close();}}}
-    };
+                        window.close();
 
-}
+            }
+        };
+
+};}
 #endif
